@@ -1,71 +1,61 @@
 # CS PhD SOP Evaluator
 
-An installable Codex skill for evidence-grounded review, comparison, and ranking of research-oriented Computer Science PhD Statements of Purpose.
+## 中文
 
-The skill evaluates SOP communication quality—not applicant worth, research potential outside the submitted text, admission probability, or an admit/reject outcome.
+一个用于评估、比较和排名研究型 CS PhD Statement of Purpose（SOP）的 Codex Skill。
 
-## What it provides
+### 功能
 
-- A 100-point rubric with seven behaviorally anchored dimensions.
-- Non-compensatory gates for prompt compliance, factual integrity, ownership, faculty freshness, cross-document consistency, template integrity, and SOP/personal-statement boundaries.
-- Single-draft review, targeted review, version comparison, same-program ranking, and cross-program comparison.
-- Evidence spans, counter-evidence, score caps, confidence labels, red flags, and prioritized revision guidance.
-- A privacy-aware deterministic script for multi-judge aggregation, disagreement detection, near-score review, and provisional tiers.
+- 使用 100 分、7 维度的证据型评分标准
+- 支持单篇审核、版本比较和多篇 SOP 排名
+- 支持匿名、多评委评分与分歧检测
+- 跨学校比较时，将学校匹配度（D6）单独报告
 
-For cross-program comparison, the ranking score excludes program-specific fit (D6). Local fit remains visible as a separate score.
+本工具只评价 **SOP 文本质量**，不评价申请者，也不预测录取概率。
 
-## Structure
+### 使用
 
-```text
-.
-├── SKILL.md
-├── agents/
-│   └── openai.yaml
-├── references/
-│   ├── batch-ranking-protocol.md
-│   ├── output-schemas.md
-│   └── sop-evaluation-rubric.md
-└── scripts/
-    └── aggregate_scores.py
-```
-
-`SKILL.md` is the routing layer. Detailed scoring anchors and procedures live in `references/` so they are loaded only when relevant.
-
-## Install
-
-Install from this repository using the Codex skill installer, or copy the repository into your local skills directory. The required skill entry point is `SKILL.md`; optional references, scripts, and agent metadata are bundled alongside it.
-
-Official skill format and installation guidance: [Build skills](https://learn.chatgpt.com/docs/build-skills).
-
-Invoke the installed skill with:
+通过 Codex Skill Installer 安装此仓库，或将仓库复制到本地 Skills 目录。安装后调用：
 
 ```text
 $evaluate-cs-phd-sops
 ```
 
-Example request:
-
-```text
-Use $evaluate-cs-phd-sops to score these three anonymized SOP drafts independently,
-then compare them for the same CS PhD program using two judge passes and rank tiers.
-```
-
-## Deterministic aggregation
-
-The aggregation script accepts anonymous IDs and rubric scores only. It does not ingest or persist SOP or CV text.
+批量分数聚合：
 
 ```bash
 python3 scripts/aggregate_scores.py scores.json --strict-privacy
 ```
 
-Input and output formats are documented in `references/output-schemas.md`. Run its built-in checks with:
+聚合文件应只包含匿名 ID 和评分，不要加入姓名、联系方式、SOP 正文或 CV 内容。
 
-```bash
-python3 scripts/aggregate_scores.py --self-test
+## English
+
+A Codex skill for evaluating, comparing, and ranking research-oriented Computer Science PhD Statements of Purpose.
+
+### Features
+
+- Evidence-based 100-point rubric with seven dimensions
+- Single-SOP review, version comparison, and batch ranking
+- Anonymous multi-judge aggregation and disagreement detection
+- Separate program-fit reporting (D6) for cross-program comparisons
+
+This tool evaluates **SOP document quality only**. It does not evaluate applicants or predict admission outcomes.
+
+### Usage
+
+Install this repository with the Codex Skill Installer, or copy it into your local skills directory. Then invoke:
+
+```text
+$evaluate-cs-phd-sops
 ```
 
-## Privacy and source note
+Aggregate batch scores with:
 
-Use anonymous `sop_id` and `judge_id` values in aggregation files. Do not include names, contact details, student IDs, local paths, SOP text, or CV content.
+```bash
+python3 scripts/aggregate_scores.py scores.json --strict-privacy
+```
 
-The rubric synthesizes publicly available university guidance and research literature. Source provenance is listed in the rubric. Local source PDFs and potentially copyrighted guide files are not redistributed in this repository.
+Aggregation files should contain anonymous IDs and scores only—never names, contact details, SOP text, or CV content.
+
+[Official Codex skill documentation](https://learn.chatgpt.com/docs/build-skills)
