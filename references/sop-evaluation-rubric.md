@@ -1228,7 +1228,7 @@ Admission outcomes are confounded by faculty capacity, funding, letters, record,
 
 # 25. Source synthesis
 
-The v2 changes are grounded in the public sources summarized below. Local copies of source PDFs are not distributed with this skill; use the official links and verify current program instructions before evaluation.
+The v2 changes are grounded in the public sources summarized below. Selected local source files are included under `source_materials/` for private reference; use official sources and verify current program instructions before evaluation.
 
 | Source | Contribution to this rubric | Caution |
 |---|---|---|
