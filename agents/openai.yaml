@@ -1,0 +1,4 @@
+interface:
+  display_name: "CS PhD SOP Evaluator"
+  short_description: "Evaluate and rank research-oriented CS PhD SOPs"
+  default_prompt: "Use $evaluate-cs-phd-sops to evaluate or rank my CS PhD SOP drafts with evidence-based scoring."
